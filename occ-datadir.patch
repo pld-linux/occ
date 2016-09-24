@@ -1,0 +1,33 @@
+--- occ-1.3.5/io.php.orig	2016-06-12 13:52:20.000000000 +0200
++++ occ-1.3.5/io.php	2016-09-24 09:35:17.320297226 +0200
+@@ -11,9 +11,9 @@
+ include_once 'misc.php';
+ 
+ /* Data locations */
+-$res_users='occ-data/users';
+-$res_games='occ-data/games';
+-$res_archive='occ-data/archive';
++$res_users='/var/lib/occ/occ-data/users';
++$res_games='/var/lib/occ/occ-data/games';
++$res_archive='/var/lib/occ/occ-data/archive';
+ 
+ /* E-Mail header for notifications */
+ $mail_header="From: noreply-occ@yourdomain.org\n".
+@@ -34,7 +34,7 @@
+ 
+ 	if ($ioref++==0) {
+ 		$attempts=0;
+-		while (($hfile=fopen('tmp/iolock','x'))===false) {
++		while (($hfile=fopen('/var/lib/occ/tmp/iolock','x'))===false) {
+ 			usleep(100000);
+ 			if (++$attempts==20)
+ 				break;
+@@ -50,7 +50,7 @@
+ 	if ($ioref==0)
+ 		return;
+ 	if (--$ioref==0)
+-		unlink('tmp/iolock');
++		unlink('/var/lib/occ/tmp/iolock');
+ }
+ 
+ /* Load a game (try active games first, then archived games) and set various
