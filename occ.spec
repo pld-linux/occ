@@ -8,6 +8,8 @@ License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://downloads.sourceforge.net/lgames/%{name}-%{version}.tar.gz
 # Source0-md5:	e0db96d6b867eded1c6c8a00b30fd50d
+Source1:	apache.conf
+Source2:	lighttpd.conf
 Patch0:		%{name}-datadir.patch
 URL:		http://lgames.sourceforge.net/OCC/
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -57,27 +59,6 @@ celu przeanalizowania dowolnym narzędziem, np. Fritzem.
 %setup -q
 %patch0 -p1
 
-cat > apache.conf <<'EOF'
-Alias /%{name} %{_appdir}
-<Directory %{_appdir}>
-	# Apache 2.x
-	<IfModule !mod_authz_core.c>
-		Order allow,deny
-		Allow from all
-	</IfModule>
-	# Apache 2.4
-	<IfModule mod_authz_core.c>
-		Require all granted
-	</IfModule>
-</Directory>
-EOF
-
-cat > lighttpd.conf <<'EOF'
-alias.url += (
-	"/%{name}" => "%{_appdir}",
-)
-EOF
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_appdir},/var/lib/%{name}}
@@ -85,9 +66,9 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_appdir},/var/lib/%{name}}
 cp -a images *.php *.js $RPM_BUILD_ROOT%{_appdir}
 cp -a occ-data tmp $RPM_BUILD_ROOT/var/lib/%{name}
 
-cp -p apache.conf $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
-cp -p apache.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
-cp -p lighttpd.conf $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
