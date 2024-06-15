@@ -2,16 +2,16 @@
 Summary:	Online Chess Club - small PHP chess game
 Summary(pl.UTF-8):	Online Chess Club - mała gra w szachy w PHP
 Name:		occ
-Version:	1.3.5
+Version:	1.4
 Release:	1
 License:	GPL v2
 Group:		Applications/WWW
-Source0:	http://downloads.sourceforge.net/lgames/%{name}-%{version}.tar.gz
-# Source0-md5:	e0db96d6b867eded1c6c8a00b30fd50d
+Source0:	https://downloads.sourceforge.net/lgames/%{name}-%{version}.tar.gz
+# Source0-md5:	4bffaa7dac327bc932e563b5142462e6
 Source1:	apache.conf
 Source2:	lighttpd.conf
 Patch0:		%{name}-datadir.patch
-URL:		http://lgames.sourceforge.net/OCC/
+URL:		https://lgames.sourceforge.net/OCC/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	php(session)
 Requires:	webapps
