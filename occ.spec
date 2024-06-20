@@ -3,7 +3,7 @@ Summary:	Online Chess Club - small PHP chess game
 Summary(pl.UTF-8):	Online Chess Club - mała gra w szachy w PHP
 Name:		occ
 Version:	1.4
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	https://downloads.sourceforge.net/lgames/%{name}-%{version}.tar.gz
@@ -23,6 +23,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_webapp		%{name}
 %define		_sysconfdir	%{_webapps}/%{_webapp}
 %define		_appdir		%{_datadir}/%{_webapp}
+
+%define		_noautoreq_pear	.*
 
 %description
 Online Chess Club (OCC) is a small PHP chess game. It is not meant for
